@@ -1,0 +1,39 @@
+{
+  "name": "facebookAnalytics",
+  "version": "1.0.0",
+  "description": "Helper for getting Facebook Analytics",
+  "main": "server.js",
+  "dependencies": {
+    "cookie-parser": "^1.3.4",
+    "cheerio": "^0.19.0",
+    "body-parser": "^1.12.4",
+    "express": "^4.12.3",
+    "express-session": "^1.11.2",
+    "fs-extra": "^0.18.3",
+    "googleapis": "^2.0.4",
+    "passport": "^0.2.1",
+    "lodash": "^3.8.0",
+    "passport-facebook": "^2.0.0",
+    "twitter": "^1.2.5",
+    "request": "^2.55.0",
+    "request-promise": "^0.4.2",
+    "walkdir": "^0.0.9",
+    "when": "^3.7.3",
+    "oembed-auto": "^0.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kurtcorbett/facebookAnalytics.git"
+  },
+  "author": "Kurt Corbett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kurtcorbett/facebookAnalytics/issues"
+  },
+  "homepage": "https://github.com/kurtcorbett/facebookAnalytics"
+}
