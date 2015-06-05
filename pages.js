@@ -11,24 +11,30 @@ var _                 = require('lodash')
 // promisify node async function
 var writeJson = nodefn.lift(fs.writeJson);
 
+var searchParams =  {
+  since: '2015-01-01',
+  until: '2015-01-02'
+};
 
 // CREATE ALL PAGES
-createAllPagesInsights(fbPages)
+createAllPagesInsights(fbPages, searchParams)
   .then(function(page) {
     console.log('-----------Done-----------');
   })
   .catch(function(err) {
-   console.log(console.log('Error: ', new Error));
+    console.log('Error: ', new Error);
   });
 
 
-function createAllPagesInsights() {
+function createAllPagesInsights(pages, params) {
   console.log('Creating page insights...');
-  return when.map(fbPages, createInsights);
+  return when.map(pages, function(page) {
+    return createInsights(page, params);
+  }).catch(console.log);
 }
 
-function createInsights(page) {
-  return getPageInsights(page)
+function createInsights(page, date) {
+  return getPageInsights(page, date)
     .then(function(insight) {
       console.log(page.page);
       savePageInsights(insight, page);
@@ -39,11 +45,13 @@ function savePageInsights(insight, page) {
   return writeJson('./insights/' + page.page + '.json', insight);  
 }
 
-function getPageInsights(page) {
+function getPageInsights(page, params) {
   return rp('https://graph.facebook.com/v2.3/' 
   + page.id + '/'
   + 'insights'
-  + '?access_token=' + page.access_token)
+  + '?since=' + params.since
+  + '&until=' + params.until
+  + '&access_token=' + page.access_token)
     .then(function(data) {
       return JSON.parse(data);
     });
